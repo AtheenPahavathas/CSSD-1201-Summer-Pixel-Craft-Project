@@ -5,6 +5,19 @@
  import java.io.File;
 
 public class Blur extends Converter{
+    @Override
+public void convert(String inputFileName, String outputFileName) {
+    try {
+        BufferedImage inputImage = ImageIO.read(new File(inputFileName));
+
+        BufferedImage outputImage = processImage(inputImage);
+
+        ImageIO.write(outputImage, "png", new File(outputFileName));
+
+    } catch (IOException e) {
+        System.out.println("Error during blur conversion: " + e.getMessage());
+    }
+}
     protected BufferedImage processImage(BufferedImage inputImage) {
         int width = inputImage.getWidth();
         int height = inputImage.getHeight();

@@ -1,39 +1,39 @@
 // add the grayscale
  import java.io.IOException;
  import java.lang.reflect.InvocationTargetException;
+ 
  import javax.imageio.ImageIO;
  import java.awt.image.BufferedImage;
  import java.io.File;
 
 public class Grayscale extends Converter {
-    
-    protected BufferedImage processImage(BufferedImage inputImage) {
-        BufferedImage outputImage = new BufferedImage(inputImage.getWidth(), inputImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        parseImage(inputImage, outputImage, 0, 0);
-        return outputImage;
+
+        @Override
+public void convert(String inputFileName, String outputFileName) {
+    try {
+        BufferedImage inputImage = ImageIO.read(new File(inputFileName));
+
+        BufferedImage outputImage = processImage(inputImage);
+
+        ImageIO.write(outputImage, "png", new File(outputFileName));
+
+    } catch (IOException e) {
+        System.out.println("Error during blur conversion: " + e.getMessage());
     }
+}
+    protected BufferedImage processImage(BufferedImage inputImage) {
+       int width = inputImage.getWidth();
+       int height = inputImage.getHeight();
+       BufferedImage outputImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-    public static void parseImage(BufferedImage inputImage, BufferedImage outputImage, int x, int y) {
-        if (y == inputImage.getHeight()) {
-            return;
-
+       for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            ARGB argb = new ARGB(inputImage.getRGB(x, y));
+            int gray = (argb.red + argb.green + argb.blue) / 3;
+            ARGB grayARGB = new ARGB(argb.alpha, gray, gray, gray);
+            outputImage.setRGB(x, y, grayARGB.toInt());
         }
-        if (x == inputImage.getWidth()){
-            parseImage(inputImage, outputImage, 0, y + 1);
-            return;
-        }
-
-        ARGB argb = new ARGB(inputImage.getRGB(x, y));
-        int gray = (argb.red + argb.green + argb.blue) / 3;
-        ARGB grayARGB = new ARGB(argb.alpha, gray, gray, gray);
-        outputImage.setRGB(x, y, grayARGB.toInt());
-
-        if (x < inputImage.getWidth() -1) {
-            parseImage(inputImage, outputImage, x + 1, y);
-
-        }
-        else {
-            parseImage(inputImage, outputImage, 0, y + 1);
-        }
+       }
+       return outputImage;
     }
 }
