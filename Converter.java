@@ -1,4 +1,4 @@
-abstract class Converter { // Base class for the "converters" to inherit from 
+public abstract class Converter { // Base class for the "converters" to inherit from 
 	
 	// convert
 	public abstract void convert (String inputFileName, String outputFileName) throws IOException;
