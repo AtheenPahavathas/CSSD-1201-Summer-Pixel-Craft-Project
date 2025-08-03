@@ -1,0 +1,32 @@
+// add white frame
+
+class WhiteFrame extends Converter{ // adds a white frame on the edges of the original picture
+	
+	@Override
+	public void convert(String inputFileName, String outputFileName) throws IOException{
+		
+		// read image
+		BufferedImage originalImg = readImg(inputFileName);
+		
+		int width = originalImg.getWidth();
+		int height = originalImg.getHeight();
+		
+		BufferedImage framed = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		
+		// loop through each pixel
+		for(int y = 0; y < height; y++) {
+			for(int x = 0; x < width; x++) {
+				
+				// check if the pixel is on the edge then set it to white
+				if (x < 10 || y < 10 || x >= width - 10 || y >= height - 10) {
+					int white = new ARGB(255, 255, 255, 255).toInt();
+					framed.setRGB(x,y,white);
+				}
+				else {
+					framed.setRGB(x, y, originalImg.getRGB(x,y));
+				}
+			}
+		}
+		writeImg(framed, outputFileName);
+	}
+}
