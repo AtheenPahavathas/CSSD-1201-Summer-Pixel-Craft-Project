@@ -5,6 +5,12 @@
  import java.io.File;
 
  public class Rotate extends Converter {
+    /**
+     * The image is rotated 90 degrees clockwise.
+     * The inputImage's pixel's ARGB values are set to the outputImage's pixel.
+     * Its x value would be the imputImage's height minus 1 minus the inputImage's y value.
+     * Its y value is the inputImages x value.
+     */
         @Override
 public void convert(String inputFileName, String outputFileName) {
     try {

@@ -7,6 +7,11 @@
  import java.io.File;
 
 public class Grayscale extends Converter {
+    /**
+     * The image is converted into a grayscale image.
+     * Each of the outputImage's pixels is based on the inputImage's has its red, green and blue values set to average
+     * of the inImage's pixels which are the red, green and blue values
+     */
 
         @Override
 public void convert(String inputFileName, String outputFileName) {

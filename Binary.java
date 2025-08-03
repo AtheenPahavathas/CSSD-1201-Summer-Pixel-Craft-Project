@@ -6,6 +6,11 @@
 
 
 public class Binary extends Converter {
+    /***
+     * Returns BufferedImage outputImage which is the converted binary image
+     * if the outputImage's ARGB value is more than or equal to 0xFF7F7F7F, 
+     * the ARGB value is set to white and otherwise it is set to black
+     */
             @Override
 public void convert(String inputFileName, String outputFileName) {
     try {

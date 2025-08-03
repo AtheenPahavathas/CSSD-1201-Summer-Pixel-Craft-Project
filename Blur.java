@@ -5,6 +5,11 @@
  import java.io.File;
 
 public class Blur extends Converter{
+    /**
+     * The image is converted into a blurred image.
+     * It does this by averging out the pixel and its surrounding pixels and stores it as RGBA values.
+     * After calcualting the average and makes a new ARGB color it returns the blurred image
+     */
     @Override
 public void convert(String inputFileName, String outputFileName) {
     try {
