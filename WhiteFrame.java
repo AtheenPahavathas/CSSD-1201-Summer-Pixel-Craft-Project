@@ -1,6 +1,10 @@
-// add white frame
+ import java.io.IOException;
+ import java.lang.reflect.InvocationTargetException;
+ import javax.imageio.ImageIO;
+ import java.awt.image.BufferedImage;
+ import java.io.File;
 
-public class WhiteFrame extends Converter{ // adds a white frame on the edges of the original picture
+class WhiteFrame extends Converter{
 	
 	@Override
 	public void convert(String inputFileName, String outputFileName) throws IOException{
