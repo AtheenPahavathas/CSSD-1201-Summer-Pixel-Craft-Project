@@ -1,6 +1,6 @@
 // add white frame
 
-class WhiteFrame extends Converter{ // adds a white frame on the edges of the original picture
+public class WhiteFrame extends Converter{ // adds a white frame on the edges of the original picture
 	
 	@Override
 	public void convert(String inputFileName, String outputFileName) throws IOException{
